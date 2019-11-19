@@ -11,14 +11,18 @@ const contatoSchema = new Schema({
     nome:{
         type: String,
         required: true,
-        unique: true
+        unique: true//não deixa repetir
     },
     celular:{
         type: String,
         required: true
     },
-    fotoPerfil:{
-        type: 
+    // fotoPerfil:{
+    //     type: 
+    // }
+    dataNascimento:{
+        type: Date,
+        required: true
     }
 })
 
