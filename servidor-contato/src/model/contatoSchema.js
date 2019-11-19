@@ -19,7 +19,7 @@ const contatoSchema = new Schema({
 })
 
 //cria um obj de coleção com todos os métodos
-const contatosColletion = mongoose.model('contato', contatoSchema)
+const contatosCollection = mongoose.model('contato', contatoSchema)
 
-module.exports = contatosColletion
+module.exports = contatosCollection
 
