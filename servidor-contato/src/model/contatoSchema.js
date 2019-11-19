@@ -15,6 +15,9 @@ const contatoSchema = new Schema({
     celular:{
         type: String,
         required: true
+    },
+    fotoPerfil:{
+        type: 
     }
 })
 

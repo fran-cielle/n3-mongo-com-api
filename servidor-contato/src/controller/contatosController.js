@@ -2,8 +2,15 @@
 const contatosCollection = require("../model/contatoSchema")
 
 const getAll = (request, response) => {
-  console.log(request.url)
-  response.status(200).send(contatosCollection)
+  // console.log(request.url)
+  // response.status(200).send(contatosCollection)
+  contatosCollection.find((error,contatos) =>{
+    if(error){
+      return response.status(500).send(error)
+    }else{
+      return response.status(200).send(contatos)
+    }
+  })
 };
 
 const add = (request, response) => {
