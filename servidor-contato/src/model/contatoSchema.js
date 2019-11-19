@@ -17,9 +17,10 @@ const contatoSchema = new Schema({
         type: String,
         required: true
     },
-    // fotoPerfil:{
-    //     type: 
-    // }
+    fotoPerfil:{
+        type: String, //aqui vai a URL da foto
+        required: false
+    },
     dataNascimento:{
         type: Date,
         required: true
