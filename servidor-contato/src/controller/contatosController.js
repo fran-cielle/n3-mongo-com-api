@@ -10,21 +10,42 @@ const getAll = (request, response) => {
     }else{
       return response.status(200).send(contatos)
     }
+
   })
 };
 
 const getByName = (request,response) =>{
   const nomeParams = request.params.nome
-  const filtro = {nome: nomeParams}//recebe o nome dado pelo parametro
+  const regex = new RegExp(nomeParams, "i")
+  //const filtro = {nome: nomeParams}//recebe o nome dado pelo parametro
+  const filtro = {nome: regex}
+  
 
-  contatosCollection.find(filtro, (error, contato) => {
+  contatosCollection.find(filtro, (error, contatos) => {
     if(error){
-      return response.status(500).send(error)
+      return response.status(404).send(error)
     }else{
-      return response.status(200).send(contato)
+      return response.status(200).send(contatos)
     }
   })
 }
+
+const getById = (request, response) => {
+  const idParam = request.params.id
+  contatosCollection.findById(idParam, (error, contato) =>{
+   
+      if(error){
+        return response.status(404).send(error)
+      }else {
+        if(contato){
+        return response.status(200).send(contato)
+        }else {
+          return response.status(404).send('Contato não encontrado')
+        }
+      }
+    })
+}
+
 
 
 const add = (request, response) => {
@@ -40,12 +61,11 @@ const add = (request, response) => {
       return response.status(201).send(contato)
     }
   })
-
-  
 }
 
 module.exports = {
   getAll,
   add,
-  getByName
+  getByName,
+  getById
 }
