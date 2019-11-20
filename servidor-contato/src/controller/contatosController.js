@@ -50,8 +50,6 @@ const getById = (request, response) => {
     })
 }
 
-
-
 const add = (request, response) => {
   //novo objeto para nossa nova coleção
   const contatoDoBody = request.body//objeto json que veio no body
@@ -67,9 +65,28 @@ const add = (request, response) => {
   })
 }
 
+const deleteById = (request, response) =>{
+  const idParam = request.params.id
+
+  contatosCollection.findByIdAndDelete(idParam, (error, contato) =>{
+    if(error){
+      return response.status(500).send(error)
+    }else {
+      if(contato){
+        return response.status(200).send('Contato Apagado :D')
+      }else{
+        return response.status(400).send(error)
+    }
+  }
+  })
+}
+
+
 module.exports = {
   getAll,
   add,
   getByName,
-  getById
+  getById,
+  deleteById
+
 }
