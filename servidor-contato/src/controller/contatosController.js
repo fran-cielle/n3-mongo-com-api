@@ -23,9 +23,13 @@ const getByName = (request,response) =>{
 
   contatosCollection.find(filtro, (error, contatos) => {
     if(error){
-      return response.status(404).send(error)
+      return response.status(500).send(error)//erro no banco de dados (não conectou)
     }else{
+      if(contato.length > 0){
       return response.status(200).send(contatos)
+      }else{
+        return response.status(404).send('Contato não encontrado')
+      }
     }
   })
 }
@@ -35,7 +39,7 @@ const getById = (request, response) => {
   contatosCollection.findById(idParam, (error, contato) =>{
    
       if(error){
-        return response.status(404).send(error)
+        return response.status(500).send(error)
       }else {
         if(contato){
         return response.status(200).send(contato)
