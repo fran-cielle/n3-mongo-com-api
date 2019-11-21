@@ -81,12 +81,30 @@ const deleteById = (request, response) =>{
   })
 }
 
+const alterarById = (request,response) => {
+  const idParam = request.params.id
+  const alteracaoDoBody = request.body
+  const options = {new: true} //se verdadeiro envia o obj modificado
+  
+  contatosCollection.findByIdAndUpdate(idParam,alteracaoDoBody, options, (error, contato) =>{
+  if(error){
+    return response.status(500).send(error)
+  }else {
+    if(contato){
+    return response.status(200).send(contato)
+    }else{
+      return response.status(404).send('Contato não existe')
+    }
+  } 
+  })
+}
+
 
 module.exports = {
   getAll,
   add,
   getByName,
   getById,
-  deleteById
-
+  deleteById,
+  alterarById
 }
